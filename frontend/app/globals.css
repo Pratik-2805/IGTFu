@@ -1,0 +1,500 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated to use custom color palette: cream #F5EEDC, medium blue #27548A, dark navy #183B4E, gold #DDA853 */
+:root {
+  --background: white;
+  --foreground: oklch(0.22 0.04 225);
+  --card: oklch(0.98 0.01 75);
+  --card-foreground: oklch(0.22 0.04 225);
+  --popover: oklch(0.98 0.01 75);
+  --popover-foreground: oklch(0.22 0.04 225);
+  --primary: oklch(0.37 0.08 235);
+  --primary-foreground: oklch(0.96 0.015 75);
+  --secondary: oklch(0.68 0.12 65);
+  --secondary-foreground: oklch(0.22 0.04 225);
+  --muted: oklch(0.92 0.01 75);
+  --muted-foreground: oklch(0.48 0.04 225);
+  --accent: oklch(0.68 0.12 65);
+  --accent-foreground: oklch(0.22 0.04 225);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.85 0.015 75);
+  --input: oklch(0.85 0.015 75);
+  --ring: oklch(0.68 0.12 65);
+  --chart-1: oklch(0.37 0.08 235);
+  --chart-2: oklch(0.68 0.12 65);
+  --chart-3: oklch(0.42 0.1 210);
+  --chart-4: oklch(0.58 0.18 50);
+  --chart-5: oklch(0.48 0.08 240);
+  --radius: 0.625rem;
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.22 0.04 225);
+  --foreground: oklch(0.96 0.015 75);
+  --card: oklch(0.26 0.04 225);
+  --card-foreground: oklch(0.96 0.015 75);
+  --popover: oklch(0.26 0.04 225);
+  --popover-foreground: oklch(0.96 0.015 75);
+  --primary: oklch(0.68 0.12 65);
+  --primary-foreground: oklch(0.22 0.04 225);
+  --secondary: oklch(0.32 0.05 225);
+  --secondary-foreground: oklch(0.96 0.015 75);
+  --muted: oklch(0.32 0.05 225);
+  --muted-foreground: oklch(0.68 0.04 225);
+  --accent: oklch(0.68 0.12 65);
+  --accent-foreground: oklch(0.22 0.04 225);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.96 0.015 75);
+  --border: oklch(0.32 0.05 225);
+  --input: oklch(0.32 0.05 225);
+  --ring: oklch(0.68 0.12 65);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.269 0 0);
+  --sidebar-ring: oklch(0.439 0 0);
+}
+
+/* Updated font theme with Poppins and Playfair Display */
+@theme inline {
+  --font-sans: var(--font-poppins), "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-playfair), "Georgia", serif;
+  --font-mono: "Consolas", "Monaco", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  /* Prevent horizontal scrolling on all pages */
+  html,
+  body {
+    @apply bg-background text-foreground;
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+
+  /* Ensure all containers respect viewport width */
+  body > * {
+    max-width: 100vw;
+  }
+
+  /* Added typography base styles for better hierarchy */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+
+  h4 {
+    @apply text-xl md:text-2xl;
+  }
+
+  p {
+    @apply font-sans;
+    line-height: 1.7;
+    letter-spacing: 0.01em;
+  }
+
+  button {
+    @apply font-sans font-medium;
+    letter-spacing: 0.05em;
+  }
+}
+
+/* Softened animations with slower timing and gentler easing */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 40s linear infinite;
+}
+
+/* Add overflow container for scrolling animations */
+.scroll-container {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1.2s ease-out;
+}
+
+.animate-slide-up {
+  animation: slide-up 1.2s ease-out;
+}
+
+.animate-fade-in-delay-1 {
+  animation: fade-in 1s ease-out 0.2s both;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fade-in 1s ease-out 0.4s both;
+}
+
+.animate-fade-in-delay-3 {
+  animation: fade-in 1s ease-out 0.6s both;
+}
+
+.animate-fade-in-delay-4 {
+  animation: fade-in 1s ease-out 0.8s both;
+}
+
+.animate-fade-in-delay-5 {
+  animation: fade-in 1s ease-out 1s both;
+}
+
+.animate-fade-in-delay-6 {
+  animation: fade-in 1s ease-out 1.2s both;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Softened scroll-triggered animations with slower, smoother transitions */
+.scroll-animate {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-animate.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-animate-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-animate-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-animate-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-animate-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scroll-animate-zoom {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.scroll-animate-zoom.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.scroll-animate-card {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.scroll-animate-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.animation-delay-100 {
+  transition-delay: 0.15s;
+}
+
+.animation-delay-200 {
+  transition-delay: 0.3s;
+}
+
+.animation-delay-300 {
+  transition-delay: 0.45s;
+}
+
+.animation-delay-400 {
+  transition-delay: 0.6s;
+}
+
+.animation-delay-500 {
+  transition-delay: 0.75s;
+}
+
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: inline-block;
+  animation: scroll 20s linear infinite;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(0px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-move {
+  animation: gradient-move 4s ease infinite;
+}
+
+/* RESPONSIVE TOGGLE SWITCH */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px; /* reduced for better fit */
+  height: 28px;
+}
+
+@media (max-width: 480px) {
+  .switch {
+    width: 44px; /* smaller on mobile */
+    height: 24px;
+  }
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Slider Track */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  transition: 0.3s;
+  border-radius: 30px;
+  border: 1px solid #ccc;
+}
+
+/* Slider Knob */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 22px;
+  width: 22px;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+}
+
+@media (max-width: 480px) {
+  .slider:before {
+    height: 18px;
+    width: 18px;
+  }
+}
+
+/* Checked State */
+.switch input:checked + .slider {
+  background-color: #5fdd54;
+  border: 1px solid transparent;
+}
+
+.switch input:checked + .slider:before {
+  transform: translate(24px, -50%); /* move knob right */
+}
+
+@media (max-width: 480px) {
+  .switch input:checked + .slider:before {
+    transform: translate(18px, -50%);
+  }
+}
+
+
+/* shimmering skeleton loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e2e2e2 0%,
+    #f5f5f5 50%,
+    #e2e2e2 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.6s infinite linear;
+}
