@@ -12,11 +12,17 @@ export function useAuthFetch() {
       try {
         const headers = new Headers(options.headers || {});
 
-        // JSON vs FormData
+        // Handle JSON vs FormData
         if (options.body instanceof FormData) {
           headers.delete("Content-Type");
         } else if (options.body) {
           headers.set("Content-Type", "application/json");
+        }
+
+        // ALWAYS ATTACH ACCESS TOKEN BEFORE FIRST REQUEST
+        let accessToken = await ensureFreshAccess();
+        if (accessToken) {
+          headers.set("Authorization", `Bearer ${accessToken}`);
         }
 
         // FIRST REQUEST
@@ -26,7 +32,7 @@ export function useAuthFetch() {
           credentials: "include",
         });
 
-        // If unauthorized → try refresh and retry ONCE
+        // If still unauthorized → force refresh and retry once
         if (res.status === 401) {
           const newAccess = await ensureFreshAccess();
 
