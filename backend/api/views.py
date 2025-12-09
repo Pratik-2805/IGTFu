@@ -72,13 +72,14 @@ def _set_refresh_cookie(response: Response, refresh_token: str):
         refresh_token,
         httponly=True,
         secure=secure,
-        samesite=None,
+        samesite="None",
         max_age=max_age,
         path="/",
+        domain=".indoglobaltradefair.com"
     )
 
 def _clear_refresh_cookie(response: Response):
-    response.delete_cookie("refresh", path="/")
+    response.delete_cookie("refresh", path="/", domain=".indoglobaltradefair.com")
 
 def _user_payload(user: User):
     return {
