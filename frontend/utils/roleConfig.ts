@@ -11,7 +11,7 @@ export const roleTabs = {
     "account",
     "settings",
   ],
-  manager: ["exhibitors", "visitors", "events", "gallery", "account"],
+  manager: ["exhibitors", "visitors","categories","events", "gallery", "account"],
   sales: ["exhibitors", "visitors", "account"],
 };
 
