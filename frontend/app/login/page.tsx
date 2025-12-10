@@ -25,7 +25,7 @@ export default function LoginPage() {
         `${process.env.NEXT_PUBLIC_API_BASE_URL}/login/`,
         {
           method: "POST",
-          credentials: "include", // REQUIRED for HttpOnly cookie
+          credentials: "include", // MUST HAVE for refresh cookie
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
         }
@@ -39,12 +39,15 @@ export default function LoginPage() {
         return;
       }
 
-      // Save access token + user in memory
+      /**
+       * Django returns:
+       * { access: "...", user: {...} }
+       * The refresh token is already set in HttpOnly cookie by backend.
+       */
       login(data.access, data.user);
 
-      // Multi-role redirect
-      const role = data.user.role;
-      switch (role) {
+      // Role-based redirect
+      switch (data.user.role) {
         case "admin":
           router.push("/admin");
           break;
@@ -72,7 +75,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="w-full max-w-md">
-        {/* Header */}
         <div className="text-center mb-8">
           <Image
             src="/igtf-logo.webp"
@@ -85,7 +87,6 @@ export default function LoginPage() {
           <p className="text-muted-foreground">Access your account</p>
         </div>
 
-        {/* Card */}
         <div className="bg-muted/30 p-8 rounded-lg shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-6">
             {error && (
@@ -100,7 +101,8 @@ export default function LoginPage() {
                 type="text"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                className="w-full px-4 py-3 rounded-md bg-background border border-border 
+                           focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                 placeholder="Enter username"
                 disabled={isLoading}
                 required
@@ -113,7 +115,8 @@ export default function LoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-4 py-3 rounded-md bg-background border border-border focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+                className="w-full px-4 py-3 rounded-md bg-background border border-border 
+                           focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
                 placeholder="Enter password"
                 disabled={isLoading}
                 required
@@ -123,7 +126,9 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-md hover:bg-primary/90 transition-all duration-500 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-md 
+                         hover:bg-primary/90 transition-all duration-500 font-medium 
+                         disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
